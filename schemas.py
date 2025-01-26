@@ -21,14 +21,12 @@ class UserCreate(UserBase):
     password: str
     confirmpassword: str
 
-
 class User(UserBase):
     t_id: int
 
     class Config:
         orm_mode = True
         
-
 class TaskBase(BaseModel):
     title: str
     description: Optional[str] = None
@@ -43,7 +41,12 @@ class TaskBases(BaseModel):
     status: Optional[str] = "pending"
     assigned_to: str
     created_by: str
- 
+
+class TaskCreated(BaseModel):
+    title: str
+    description: str
+    status: str
+    assigned_to: int 
 
 class TaskCreate(TaskBase):
     assigned_to: Optional[int]
@@ -58,3 +61,11 @@ class Task(TaskBase):
 class LoginRequest(BaseModel):
     username: str
     password: str
+
+class UserBase(BaseModel):
+    username: str
+    role_id: int
+    t_id: int  # ID of the user
+
+    class Config:
+        orm_mode = True
